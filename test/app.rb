@@ -8,10 +8,8 @@ before do
     'Access-Control-Allow-Headers' => 'X-Requested-With'
 end
  
-
 get '/' do
-  'Hello world'
-  # FIXME redirect to test.html
+  redirect '/index.html'
 end
 
 get '/test.js' do
