@@ -3,25 +3,51 @@
   <head>
     <title>jQuery easyXDM plugin test page for cross domain AJAX</title>
     <meta http=" " content="content" />
+    <style type="text/css" media="screen">
+      .success, .failed {
+        padding: 0.5em 2em;
+        font-size: 2em;
+      }
+      .success {
+        background-color: #bbffbb;
+        color: green;
+        border: thin solid green;
+      }
+      .failed {
+        background-color: #ffbbbb;
+        color: red;
+        border: thin solid red;
+      }
+    </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-    <script type="text/javascript" src="http://bar.example.net:3000/jquery.easyXDM.js"></script>
+    <script type="text/javascript" src="jquery.easyXDM.js"></script>
     <script type="text/javascript">
-      $.support.cors = false;
+      /* Uncomment to force usage of EasyXDM as transport */
+      //$.support.cors = false;
+
       $.ajax({
         url: "http://bar.example.net:4567/test.js",
         dataType: "json",
         success: function(json) {
-          console.log("SUCCESS!");
-          alert(json.msg);
+          if (json.msg === "oh yeah!") {
+            $("body").append("<p><span class=\"success\">Success!</span>");
+          } 
+          else {
+            console.log("JSON problem");
+            console.log(json);
+            $("body").append("<p><span class=\"failed\">Failed!</span>");
+          }
         },
         error: function(qXHR, textStatus, errorThrown) {
+          $("body").append("<p><span class=\"failed\">Failed!</span>");
+          console.log("In error callback");
           console.log(textStatus);
           console.log(errorThrown);
-}
+        }
       });
     </script>
   </head>
   <body>
-    <h1>Testing 1-2-3</h1>
+    <h1>Testing ...</h1>
   </body>
 </html>
