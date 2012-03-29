@@ -4,8 +4,17 @@ EasyXDM plugin for jQuery
 Uses easyXDM as the ajax transport when the browser don't support
 CORS.
 
+
 Install
 -------
+
+Clone the git repository:
+
+    git clone git://github.com/GyldendalDigital/jQuery-EasyXDM.git
+    
+Or download the project as a zip file from
+https://github.com/GyldendalDigital/jQuery-EasyXDM/zipball/master
+
 
 Usage
 -----
@@ -24,8 +33,10 @@ Options supported by easyXDM.Rpc.request()
 FIXME set defaults to ensure consistent behaviour?
 
 
-Testing
--------
+Development
+-----------
+
+### Testing
 
 Add to /etc/hosts
 
@@ -50,6 +61,7 @@ Bugs
 ----
 
 Report bugs on https://github.com/GyldendalDigital/jQuery-EasyXDM/issues
+
 
 License
 -------
