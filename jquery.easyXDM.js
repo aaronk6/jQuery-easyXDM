@@ -7,7 +7,7 @@
             return {
                
                 send: function( headers, completeCallback ) {
-                    if (!s.crossDomain) return;
+                    if (!options.crossDomain) return;
 			              $.getScript("easy_xdm/easyXDM.min.js", function() {
                         if (!(typeof(window["JSON"]) == 'object' && window["JSON"])) {
 				                    $.getScript("easy_xdm/json2.js");
