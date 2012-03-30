@@ -8,6 +8,14 @@ CORS.
 Install
 -------
 
+### EasyXDM
+
+First you need to install and configure easyXDM. See
+http://easyxdm.net for instructions. The plugin assumes that easyXDM
+are installed in the /easy_xdm directory.
+
+### The plugin
+
 Clone the git repository:
 
     git clone git://github.com/GyldendalDigital/jQuery-EasyXDM.git
@@ -16,8 +24,15 @@ Or download the project as a zip file from
 https://github.com/GyldendalDigital/jQuery-EasyXDM/zipball/master
 
 
+
 Usage
 -----
+
+The plugin is used just like you would use jquery's ajax function.
+
+### Known incompabilities
+
+FIXME
 
 Options supported by easyXDM.Rpc.request()
 
@@ -51,7 +66,9 @@ Then
     wget http://cloud.github.com/downloads/oyvindkinsey/easyXDM/easyXDM-2.4.15.118.zip
     unzip !!:t
     gem install sinatra
-    cp ../jquery.easyXDM.js public
+    cd ../public 
+    ln -s ../../jquery.easyXDM.js
+    cd ../..
     ruby app.rb
 
 Open a browser and go to http://foo.example.com:4567/
