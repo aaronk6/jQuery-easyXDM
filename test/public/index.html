@@ -4,10 +4,6 @@
     <title>jQuery easyXDM plugin test page for cross domain AJAX</title>
     <meta http=" " content="content" />
     <style type="text/css" media="screen">
-      .success, .failed {
-        padding: 0.5em 2em;
-        font-size: 2em;
-      }
       .success {
         background-color: #bbffbb;
         color: green;
@@ -22,32 +18,38 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
     <script type="text/javascript" src="jquery.easyXDM.js"></script>
     <script type="text/javascript">
-      /* Uncomment to force usage of EasyXDM as transport */
-      //$.support.cors = false;
-
-      $.ajax({
-        url: "http://bar.example.net:4567/test.js",
-        dataType: "json",
-        success: function(json) {
-          if (json.msg === "oh yeah!") {
-            $("body").append("<p><span class=\"success\">Success!</span>");
-          } 
-          else {
-            console.log("JSON problem");
-            console.log(json);
-            $("body").append("<p><span class=\"failed\">Failed!</span>");
+      function doTheAjax(str) {
+        $.ajax({
+          url: "http://bar.example.net:4567/test.js",
+          dataType: "json",
+          success: function(json) {
+            var html = "<tr><td>" + str + "</td>";
+            if (json.msg === "oh yeah!") {
+              html += "<td class=\"success\">success</td>";
+            } 
+            else {
+              console.log("JSON problem");
+              console.log(json);
+              html += "<td class=\"failed\">failed</td>";
+            }
+            $("body table").append(html + "</tr>");
+          },
+          error: function(qXHR, textStatus, errorThrown) {
+            $("body table").append("<tr><td>" + str + "</td><td class=\"failed\">failed</td></tr>");
+            console.log("In error callback");
+            console.log(textStatus);
+            console.log(errorThrown);
           }
-        },
-        error: function(qXHR, textStatus, errorThrown) {
-          $("body").append("<p><span class=\"failed\">Failed!</span>");
-          console.log("In error callback");
-          console.log(textStatus);
-          console.log(errorThrown);
-        }
-      });
+        });
+      }
+      doTheAjax("jquery");
+      $.support.cors = false;
+      doTheAjax("easyxdm");
     </script>
   </head>
   <body>
     <h1>Testing ...</h1>
+    <table>
+    </table>
   </body>
 </html>
