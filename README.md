@@ -28,7 +28,9 @@ https://github.com/GyldendalDigital/jQuery-EasyXDM/zipball/master
 Usage
 -----
 
-The plugin is used just like you would use jquery's ajax function.
+The plugin is used just like you would use jquery's ajax
+function. Take a look on the files in the test folder for a simple
+example.
 
 ### Known incompabilities
 
