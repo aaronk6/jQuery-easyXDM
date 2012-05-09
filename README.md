@@ -35,8 +35,11 @@ as in this example:
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
   <script type="text/javascript" src="/javascripts/jquery.easyXDM.js"></script>
 
-Take a look at the files in the test folder for a simple example.
+Notice that easyXDM debugging can be easily enabled by just adding the extra parameter
+  jquery.easyXDM.debug=true
+to the page that loads the jquery.easyXDM plugin.
 
+Take a look at the files in the test folder for a simple example.
 
 Development
 -----------
@@ -63,6 +66,8 @@ Then
     popd
 
 Open a browser and go to http://foo.example.com:4567/
+For running with easyXDM debugging enabled go to
+http://foo.example.com:4567/index.html?jquery.easyXDM.debug=true
 
 
 Bugs
