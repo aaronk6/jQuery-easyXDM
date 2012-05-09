@@ -16,11 +16,12 @@
       }
     </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-    <script type="text/javascript" src="jquery.easyXDM.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.easyXDM.js"></script>
     <script type="text/javascript">
-      function doTheAjax(str) {
+      function doTheAjax(str,verb) {
         $.ajax({
           url: "http://bar.example.net:4567/test.js",
+          method: verb,
           dataType: "json",
           data: {foo : "bar"},
           success: function(json) {
@@ -43,9 +44,11 @@
           }
         });
       }
-      doTheAjax("jquery");
+      doTheAjax("jquery GET","GET");
+      doTheAjax("jquery POST","POST");
       $.support.cors = false;
-      doTheAjax("easyxdm");
+      doTheAjax("easyxdm GET","GET");
+      doTheAjax("easyxdm POST","POST");
     </script>
   </head>
   <body>
