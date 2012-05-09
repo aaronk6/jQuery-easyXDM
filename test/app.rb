@@ -1,12 +1,21 @@
 require 'sinatra'
 require 'json'
 
+configure do
+  disable :protection # Avoid prevention of OPTIONS requests to check if CS is allowed
+end
+
 before do
-  headers 'Access-Control-Allow-Origin' => request.env['HTTP_ORIGIN'] || '*',
-    'Access-Control-Allow-Methods' => 'GET, POST, HEAD, OPTIONS',
-    'Access-Control-Allow-Credentials' => 'true',
-    'Access-Control-Max-Age' => '1728000',
-    'Access-Control-Allow-Headers' => 'X-Requested-With'
+  headers('Access-Control-Allow-Origin' => request.env['HTTP_ORIGIN'] || '*',
+          'Access-Control-Allow-Credentials' => 'true')
+end
+
+options '/*' do
+  headers('Access-Control-Allow-Headers' => 'X-Requested-With, X-Prototype-Version, X-CSRF-Token',
+          'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS',
+          'Access-Control-Max-Age' => '5')
+  content_type 'text/plain'
+  ""
 end
  
 get '/' do
