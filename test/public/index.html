@@ -22,9 +22,10 @@
         $.ajax({
           url: "http://bar.example.net:4567/test.js",
           dataType: "json",
+          data: {foo : "bar"},
           success: function(json) {
             var html = "<tr><td>" + str + "</td>";
-            if (json.msg === "oh yeah!") {
+            if (json.foo === "bar") {
               html += "<td class=\"success\">success</td>";
             } 
             else {

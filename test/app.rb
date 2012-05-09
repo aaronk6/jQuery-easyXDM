@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 
 before do
   headers 'Access-Control-Allow-Origin' => request.env['HTTP_ORIGIN'] || '*',
@@ -13,5 +14,6 @@ get '/' do
 end
 
 get '/test.js' do
-  '{"msg": "oh yeah!"}'
+  content_type :json
+  {"message" => "successful server response", "foo" => params[:foo]}.to_json
 end
