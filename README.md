@@ -61,7 +61,7 @@ Then
     wget http://cloud.github.com/downloads/oyvindkinsey/easyXDM/easyXDM-2.4.15.118.zip
     unzip easyXDM-2.4.15.118.zip
     popd
-    gem install sinatra
+    sudo gem install sinatra
     ruby app.rb
     popd
 
