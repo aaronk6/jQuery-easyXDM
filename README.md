@@ -63,7 +63,9 @@ Then
     rm -rf easyXDM-2.4.15.118.zip example tests cors
     popd
     sudo gem install sinatra
+    pushd test
     ruby app.rb
+    popd
     popd
 
 Open a browser and go to http://foo.example.com:4567/
