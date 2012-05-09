@@ -33,7 +33,7 @@ use easyXDM when the browser does not support CORS.
 To activate the jquery.easyXDM.js file must be loaded after jQuery itself, such
 as in this example:
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-  <script type="text/javascript" src="/javascripts/jquery.easyXDM.provider.js"></script>
+  <script type="text/javascript" src="/javascripts/jquery.easyXDM.js"></script>
 
 Take a look at the files in the test folder for a simple example.
 
