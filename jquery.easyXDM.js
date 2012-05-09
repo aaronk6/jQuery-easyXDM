@@ -13,14 +13,23 @@ var jquery_easyXDM = {};
         if(/jquery\.easyXDM\.debug=true/.test(window.location)){ easyXDM_debug = true; };
         var easyXDM_url = "/easyXDM/easyXDM.min.js";
         if(easyXDM_debug) { easyXDM_url = "/easyXDM/easyXDM.debug.js" };
-        // TODO: Replace with jQuery.cachedScript from http://api.jquery.com/jQuery.getScript/
-        $.getScript(easyXDM_url, function() {
+        function continue_after_easyXDM_load() {
           //var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
           //window.jquery_easyXDM.easyXDM = scoped_easyXDM;
           var remote_url = "/javascripts/jquery.easyXDM.provider.html";
           if(easyXDM_debug) { remote_url += "?jquery.easyXDM.debug=true" };
           easyXDM_connection = new easyXDM.Rpc({ remote: remote_url }, { remote: { jquery_proxy: {} } });
           callbacks.success(easyXDM_connection);
+        };
+        // TODO: Replace with jQuery.cachedScript from http://api.jquery.com/jQuery.getScript/
+        $.getScript(easyXDM_url, function() {
+          // Load a json implementation if needed by old browsers
+          // Avoid easyXDM helper that returns before the script is loaded.
+          if(! (typeof(window["JSON"]) == 'object' && window["JSON"]) ) {
+            $.getScript("/easyXDM/json2.js",continue_after_easyXDM_load);
+          } else {
+            continue_after_easyXDM_load();
+          };
         });
       };
     };
