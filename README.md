@@ -60,6 +60,7 @@ Then
     cd easyXDM
     wget http://cloud.github.com/downloads/oyvindkinsey/easyXDM/easyXDM-2.4.15.118.zip
     unzip easyXDM-2.4.15.118.zip
+    rm -rf easyXDM-2.4.15.118.zip example tests cors
     popd
     sudo gem install sinatra
     ruby app.rb
