@@ -1,7 +1,7 @@
 EasyXDM plugin for jQuery
 =========================
 
-Uses easyXDM as the ajax transport when the browser don't support
+Uses easyXDM as the ajax transport when the browser doesn't support
 CORS.
 
 
@@ -12,7 +12,7 @@ Install
 
 First you need to install and configure easyXDM. See
 http://easyxdm.net for instructions. The plugin assumes that easyXDM
-are installed in the /easy_xdm directory.
+are installed in the /easyXDM directory.
 
 ### The plugin
 
@@ -23,31 +23,19 @@ Clone the git repository:
 Or download the project as a zip file from
 https://github.com/GyldendalDigital/jQuery-EasyXDM/zipball/master
 
-
+The plugin should support anything that $.ajax supports.
 
 Usage
 -----
 
-The plugin is used just like you would use jquery's ajax
-function. Take a look on the files in the test folder for a simple
-example.
+The plugin modifies the regular $.ajax / jQuery.ajax method to automatically
+use easyXDM when the browser does not support CORS.
+To activate the jquery.easyXDM.js file must be loaded after jQuery itself, such
+as in this example:
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+  <script type="text/javascript" src="/javascripts/jquery.easyXDM.provider.js"></script>
 
-### Known incompabilities
-
-FIXME
-
-Options supported by easyXDM.Rpc.request()
-
- - url:     FIXME
- - type:    GET, POST, etc.
- - headers: FIXME
- - timeout: the number of milliseconds before a timeout occurs.
- - data:    A map
- - dataType: json
- - success: FIXME
- - error:   FIXME
-
-FIXME set defaults to ensure consistent behaviour?
+Take a look at the files in the test folder for a simple example.
 
 
 Development
@@ -62,16 +50,17 @@ Add to /etc/hosts
 
 Then
 
-    cd test
-    mkdir easy_xdm
-    cd !$
+    git clone git://github.com/GyldendalDigital/jQuery-EasyXDM.git
+    pushd jQuery-EasyXDM
+    pushd test/public
+    mkdir easyXDM
+    cd easyXDM
     wget http://cloud.github.com/downloads/oyvindkinsey/easyXDM/easyXDM-2.4.15.118.zip
-    unzip !!:t
+    unzip easyXDM-2.4.15.118.zip
+    popd
     gem install sinatra
-    cd ../public 
-    ln -s ../../jquery.easyXDM.js
-    cd ../..
     ruby app.rb
+    popd
 
 Open a browser and go to http://foo.example.com:4567/
 
