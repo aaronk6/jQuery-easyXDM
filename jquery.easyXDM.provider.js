@@ -17,7 +17,16 @@
       local: {
         // define the exposed method
         jquery_proxy: function(config, continuation_proxy){
-          $.ajax(config).always(function(data,textStatus,jqXHR){
+          $.ajax(config).done(function(data,textStatus,jqXHR){
+            var result = {status: jqXHR.status,
+              statusText: jqXHR.statusText,
+              responses: {},
+              headers: jqXHR.getAllResponseHeaders()
+            } ;
+            if(jqXHR.responseText){ result.responses.text = jqXHR.responseText }
+            if(jqXHR.responseXml) { result.responses.xml  = jqXHR.responseXml }
+            continuation_proxy(result);
+          }).fail(function(jqXHR,textStatus,errorMessage){
             var result = {status: jqXHR.status,
               statusText: jqXHR.statusText,
               responses: {},
