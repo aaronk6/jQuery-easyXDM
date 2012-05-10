@@ -22,7 +22,12 @@ get '/' do
   redirect '/index.html'
 end
 
-get '/test.js' do
+get '/test_get.js' do
   content_type :json
-  {"message" => "successful server response", "foo" => params[:foo]}.to_json
+  {"message" => "GET with successful server response", "foo" => params[:foo]}.to_json
+end
+
+post '/test_post.js' do
+  content_type :json
+  {"message" => "POST with successful server response", "foo" => params[:foo]}.to_json
 end
