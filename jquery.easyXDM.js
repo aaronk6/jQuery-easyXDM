@@ -25,7 +25,6 @@ var jquery_easyXDM = {};
           easyXDM_connection = new scoped_easyXDM.Rpc({ remote: remote_url }, { remote: { jquery_proxy: {} } });
           callbacks.success(easyXDM_connection);
         };
-        // TODO: Replace with jQuery.cachedScript from http://api.jquery.com/jQuery.getScript/
         $.getScript(easyXDM_url, function() {
           // Load a json implementation if needed by old browsers
           // Avoid easyXDM helper that returns before the script is loaded.
