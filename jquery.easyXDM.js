@@ -14,11 +14,15 @@ var jquery_easyXDM = {};
         var easyXDM_url = "/easyXDM/easyXDM.min.js";
         if(easyXDM_debug) { easyXDM_url = "/easyXDM/easyXDM.debug.js" };
         function continue_after_easyXDM_load() {
-          //var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
-          //window.jquery_easyXDM.easyXDM = scoped_easyXDM;
+          // Use noConflict to release any global state, to avoid conflict with
+          // other easyXDM instances in the window of this page.
+          var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
+          // Make the scoped easyXDM available as a unique global name, that can be found
+          // from the easyXDM provider, and must match the noConflict name in the provider.
+          jquery_easyXDM.easyXDM = scoped_easyXDM;
           var remote_url = "/javascripts/jquery.easyXDM.provider.html";
           if(easyXDM_debug) { remote_url += "?jquery.easyXDM.debug=true" };
-          easyXDM_connection = new easyXDM.Rpc({ remote: remote_url }, { remote: { jquery_proxy: {} } });
+          easyXDM_connection = new scoped_easyXDM.Rpc({ remote: remote_url }, { remote: { jquery_proxy: {} } });
           callbacks.success(easyXDM_connection);
         };
         // TODO: Replace with jQuery.cachedScript from http://api.jquery.com/jQuery.getScript/
