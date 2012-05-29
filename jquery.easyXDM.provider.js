@@ -9,13 +9,13 @@
 (function ($) {
   // Load correct version of easyXDM
   var easyXDM_debug = false;
-  if (/jquery\.easyXDM\.debug=true/.test(window.location)) {
+  if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
     easyXDM_debug = true;
-  };
+  }
   var easyXDM_url = "/easyXDM/easyXDM.min.js";
   if (easyXDM_debug) {
     easyXDM_url = "/easyXDM/easyXDM.debug.js"
-  };
+  }
   $.getScript(easyXDM_url).done(function () {
     // Use the scoped easyXDM available as a unique global name in the "parent",
     // and must match the noConflict name in parent.
@@ -48,10 +48,10 @@
                 headers   :jqXHR.getAllResponseHeaders()
               };
               if (jqXHR.responseText) {
-                result.responses.text = jqXHR.responseText
+                result.responses.text = jqXHR.responseText;
               }
               if (jqXHR.responseXml) {
-                result.responses.xml = jqXHR.responseXml
+                result.responses.xml = jqXHR.responseXml;
               }
               continuation_proxy(result);
             });
