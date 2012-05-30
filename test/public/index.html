@@ -45,9 +45,10 @@
           }
         });
       }
+      $.support.cors = true; // Force usage of regular ajax, even if cors is not supported.
       doTheAjax("jquery GET","GET","/test_get.js");
       doTheAjax("jquery POST","POST","/test_post.js");
-      $.support.cors = false;
+      $.support.cors = false; // Force usage of plugin.
       doTheAjax("easyxdm GET","GET","/test_get.js");
       doTheAjax("easyxdm POST","POST","/test_post.js");
       doTheAjax("easyxdm GET invalid url","GET","/test_missing.js");
