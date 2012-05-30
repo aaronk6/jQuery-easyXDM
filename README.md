@@ -20,7 +20,7 @@ This plugin requires an already setup web server or web application with
 cross-site access controls support enabled, i.e. a server returning HTTP
 responses containing proper headers.
 
-## Producer
+## Provider
 
 The server already providing support for CORS, must have both the easyXDM
 library and the jQuery-EasyXDM plugin files residing on the server.
@@ -45,8 +45,8 @@ library and the jQuery-EasyXDM plugin files residing on the server.
       `/tmp/jQuery-EasyXDM/jquery.easyXDM.provider.js' -> `javascripts/jquery.easyXDM.provider.js'
 </pre>
 
-With this library and plugin, the server will now correctly handle CORS requests
-from browsers not supporting CORS.
+With this library and plugin, the server will now correctly handle CORS
+requests from browsers not supporting CORS.
 
 ## Consumer
 
@@ -70,7 +70,7 @@ includes the jQuery-EasyXDM plugin enable easyXDM debugging.
 <pre class="note">
     $ tail -2 /etc/hosts
     ### Test CORS
-    127.0.0.1       consumer.example.com producer.example.net
+    127.0.0.1       consumer.example.com provider.example.net
 </pre>
 
 **2. Download easyXDM and**:
