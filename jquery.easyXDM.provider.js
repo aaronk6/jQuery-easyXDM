@@ -25,6 +25,12 @@
       local:{
         // define the exposed method
         jquery_proxy:function (config, continuation_proxy) {
+          // By definition easyXDM is used when crossDomain is not supported,
+          // and easyXDM transforms the crossDomain request into a regular request
+          // inside an embedded iframe.
+          // This request is now inside the embedded iframe, and is therefore
+          // by definition no longer a crossDomain request.
+          config.crossDomain = false;
           $.ajax(config).done(
             function (data, textStatus, jqXHR) {
               var result = {
