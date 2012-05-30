@@ -21,6 +21,7 @@
       function doTheAjax(str,verb,relative_url) {
         $.ajax({
           url: "http://bar.example.net:4567"+relative_url,
+          crossDomain: true,
           type: verb,
           dataType: "json",
           data: {foo : "bar"},
