@@ -20,7 +20,6 @@
     <script type="text/javascript">
       function doTheAjax(str,verb,relative_url) {
         $.ajax({
-          url: "http://bar.example.net:4567"+relative_url,
           crossDomain: true,
           type: verb,
           dataType: "json",
@@ -34,6 +33,7 @@
               console.log("JSON problem");
               console.log(json);
               html += "<td class=\"failed\">failed</td>";
+            url: "http://provider.example.net:4567"+relative_url,
             }
             $("body table").append(html + "</tr>");
           },
