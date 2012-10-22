@@ -39,21 +39,24 @@
                 $("#"+result_id).addClass("failed").html("failed");
               }
             },
-            error: function(qXHR, textStatus, errorThrown) {
+            error: function(jqXHR, textStatus, errorThrown) {
               console.log("error callback for "+result_id);
               console.log(textStatus);
               console.log(errorThrown);
-              $("#"+result_id).addClass("failed").html(errorThrown);
+              $("#"+result_id).addClass("failed").html(errorThrown.toString());
             }
           });
         }
-        $.support.cors = true; // Force usage of regular ajax, even if cors is not supported.
-        doTheAjax("test1","jquery GET","GET","/test_get.js");
-        doTheAjax("test2","jquery POST","POST","/test_post.js");
-        $.support.cors = false; // Force usage of plugin.
-        doTheAjax("test3","easyxdm GET","GET","/test_get.js");
-        doTheAjax("test4","easyxdm POST","POST","/test_post.js");
-        doTheAjax("test5","easyxdm GET invalid url (should fail)","GET","/test_missing.js");
+        // Keep existing value of $.support.cors to check that auto selection of transport works as expected.
+        doTheAjax("test1","CORS GET","GET","/test_get.js");
+        doTheAjax("test2","CORS POST","POST","/test_post.js");
+        $.support.cors = true; // Force usage of regular ajax, even if CORS is not supported.
+        doTheAjax("test3","jquery GET, fail on IE <= 9","GET","/test_get.js");
+        doTheAjax("test4","jquery POST, fail on IE <= 9","POST","/test_post.js");
+        $.support.cors = false; // Force usage of plugin, even if CORS is supported..
+        doTheAjax("test5","easyxdm GET","GET","/test_get.js");
+        doTheAjax("test6","easyxdm POST","POST","/test_post.js");
+        doTheAjax("test7","easyxdm GET invalid url, always fail with 'Not Found'","GET","/test_missing.js");
       });
     </script>
   </head>
