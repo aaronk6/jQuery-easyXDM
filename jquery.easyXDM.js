@@ -10,7 +10,7 @@ var jquery_easyXDM = {};
   var callbackQueue = [];
   var easyXDM_connection = null;
   var error = null;
-  var doRequests = function (callbacks) {
+  var doRequests = function (provider_base_url,callbacks) {
     if (!$.support.cors) {
       // Allow debugging of easyXDM by adding easyXDM_debug=true as parameter
       // to the page that uses this plugin.
@@ -30,7 +30,7 @@ var jquery_easyXDM = {};
         // be found from the easyXDM provider, and must match the noConflict
         // name in the provider.
         jquery_easyXDM.easyXDM = scoped_easyXDM;
-        var remote_url = "/javascripts/jquery.easyXDM.provider.html";
+        var remote_url = provider_base_url + "/javascripts/jquery.easyXDM.provider.html";
         if (easyXDM_debug) {
           remote_url += "?jquery.easyXDM.debug=true"
         }
@@ -50,12 +50,12 @@ var jquery_easyXDM = {};
     }
   };
 
-  jquery_easyXDM.getConnection = function (callbacks) {
+  jquery_easyXDM.getConnection = function (provider_base_url,callbacks) {
     switch (state) {
       case "before":
         state = "working";
         callbackQueue.push(callbacks);
-        doRequests({
+        doRequests(provider_base_url,{
           success:function (singletonInstance) {
             state = "success";
             easyXDM_connection = singletonInstance;
@@ -90,9 +90,17 @@ var jquery_easyXDM = {};
 
   jQuery.ajaxTransport(function (options, originalOptions, jqXHR) {
     if (!$.support.cors && options.crossDomain) {
+      // Assume a relative url as fallback, even if it is senseless, it may be used for testing.
+      var provider_base_url = "";
+      // Each CORS enabled provider must have a unique connection, therefore
+      // generate a name from the provider_base_url as an index.
+      var regexp_results = options.url.match(/^(https?:\/\/[^\/]*)\/?.*/);
+      if(regexp_results){
+       provider_base_url = regexp_results[1];
+      };
       return {
         send :function (headers, completeCallback) {
-          jquery_easyXDM.getConnection({
+          jquery_easyXDM.getConnection(provider_base_url,{
             success:function (easyXDM_connection) {
               function continuation_proxy(results) {
                 completeCallback(results.status, results.statusText, results.responses, results.headers);
