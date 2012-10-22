@@ -18,40 +18,43 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
     <script type="text/javascript" src="/javascripts/jquery.easyXDM.js"></script>
     <script type="text/javascript">
-      function doTheAjax(str,verb,relative_url) {
-        $.ajax({
-          crossDomain: true,
-          type: verb,
-          dataType: "json",
-          data: {foo : "bar"},
-          success: function(json) {
-            var html = "<tr><td>" + str + "</td>";
-            if (json.foo === "bar") {
-              html += "<td class=\"success\">success</td>";
-            } 
-            else {
-              console.log("JSON problem");
-              console.log(json);
-              html += "<td class=\"failed\">failed</td>";
+      $(function(){
+        function doTheAjax(id,str,verb,relative_url) {
+          var result_id = id + "_result";
+          $("body table").append("<tr><td>" + str + "</td><td id=\""+result_id+"\"></td></tr>");
+          $.ajax({
             url: "http://provider.example.net:4567"+relative_url,
+            crossDomain: true,
+            type: verb,
+            dataType: "json",
+            data: {foo : "bar"},
+            success: function(json) {
+              console.log("success callback for "+result_id);
+              if (json.foo === "bar") {
+                $("#"+result_id).addClass("success").html("success");
+              } 
+              else {
+                console.log("JSON problem");
+                console.log(json);
+                $("#"+result_id).addClass("failed").html("failed");
+              }
+            },
+            error: function(qXHR, textStatus, errorThrown) {
+              console.log("error callback for "+result_id);
+              console.log(textStatus);
+              console.log(errorThrown);
+              $("#"+result_id).addClass("failed").html(errorThrown);
             }
-            $("body table").append(html + "</tr>");
-          },
-          error: function(qXHR, textStatus, errorThrown) {
-            $("body table").append("<tr><td>" + str + "</td><td class=\"failed\">"+errorThrown+"</td></tr>");
-            console.log("In error callback");
-            console.log(textStatus);
-            console.log(errorThrown);
-          }
-        });
-      }
-      $.support.cors = true; // Force usage of regular ajax, even if cors is not supported.
-      doTheAjax("jquery GET","GET","/test_get.js");
-      doTheAjax("jquery POST","POST","/test_post.js");
-      $.support.cors = false; // Force usage of plugin.
-      doTheAjax("easyxdm GET","GET","/test_get.js");
-      doTheAjax("easyxdm POST","POST","/test_post.js");
-      doTheAjax("easyxdm GET invalid url","GET","/test_missing.js");
+          });
+        }
+        $.support.cors = true; // Force usage of regular ajax, even if cors is not supported.
+        doTheAjax("test1","jquery GET","GET","/test_get.js");
+        doTheAjax("test2","jquery POST","POST","/test_post.js");
+        $.support.cors = false; // Force usage of plugin.
+        doTheAjax("test3","easyxdm GET","GET","/test_get.js");
+        doTheAjax("test4","easyxdm POST","POST","/test_post.js");
+        doTheAjax("test5","easyxdm GET invalid url (should fail)","GET","/test_missing.js");
+      });
     </script>
   </head>
   <body>
