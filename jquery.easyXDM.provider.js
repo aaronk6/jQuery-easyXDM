@@ -16,7 +16,7 @@
   if (easyXDM_debug) {
     easyXDM_url = "/easyXDM/easyXDM.debug.js"
   }
-  $.getScript(easyXDM_url).done(function () {
+  function continue_after_easyXDM_load() {
     // Use the scoped easyXDM available as a unique global name in the "parent",
     // and must match the noConflict name in parent.
     var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
@@ -31,22 +31,7 @@
           // This request is now inside the embedded iframe, and is therefore
           // by definition no longer a crossDomain request.
           config.crossDomain = false;
-          $.ajax(config).done(
-            function (data, textStatus, jqXHR) {
-              var result = {
-                status    :jqXHR.status,
-                statusText:jqXHR.statusText,
-                responses :{},
-                headers   :jqXHR.getAllResponseHeaders()
-              };
-              if (jqXHR.responseText) {
-                result.responses.text = jqXHR.responseText
-              }
-              if (jqXHR.responseXml) {
-                result.responses.xml = jqXHR.responseXml
-              }
-              continuation_proxy(result);
-            }).fail(function (jqXHR, textStatus, errorMessage) {
+          $.ajax(config).done(function (data, textStatus, jqXHR) {
               var result = {
                 status    :jqXHR.status,
                 statusText:jqXHR.statusText,
@@ -60,9 +45,30 @@
                 result.responses.xml = jqXHR.responseXml;
               }
               continuation_proxy(result);
-            });
+          }).fail(function(jqXHR, textStatus, errorMessage) {
+              var result = {
+                status    :jqXHR.status,
+                statusText:jqXHR.statusText,
+                responses :{},
+                headers   :jqXHR.getAllResponseHeaders()
+              };
+              if (jqXHR.responseText) {
+                result.responses.text = jqXHR.responseText;
+              }
+              if (jqXHR.responseXml) {
+                result.responses.xml = jqXHR.responseXml;
+              }
+              continuation_proxy(result);
+          });
         }
       }
     });
+  }
+  $.getScript(easyXDM_url,function () {
+    if (!(typeof(window["JSON"]) == 'object' && window["JSON"])) {
+      $.getScript("/easyXDM/json2.js", continue_after_easyXDM_load);
+    } else {
+      continue_after_easyXDM_load();
+    }
   });
 })(jQuery);
