@@ -15,15 +15,15 @@
         border: thin solid red;
       }
     </style>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.easyXDM.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+    <script type="text/javascript" src="http://provider.example.net:4569/javascripts/jquery.easyXDM.js"></script>
     <script type="text/javascript">
       $(function(){
         function doTheAjax(id,str,verb,relative_url) {
           var result_id = id + "_result";
           $("body table").append("<tr><td>" + str + "</td><td id=\""+result_id+"\"></td></tr>");
           $.ajax({
-            url: "http://provider.example.net:4567"+relative_url,
+            url: "http://provider.example.net:4569"+relative_url,
             crossDomain: true,
             type: verb,
             dataType: "json",
@@ -47,6 +47,7 @@
             }
           });
         }
+        $("#jquery_version").html(jQuery.fn.jquery);
         // Keep existing value of $.support.cors to check that auto selection of transport works as expected.
         doTheAjax("test1","CORS GET","GET","/test_get.js");
         doTheAjax("test2","CORS POST","POST","/test_post.js");
@@ -61,7 +62,7 @@
     </script>
   </head>
   <body>
-    <h1>Testing ...</h1>
+    <h1>Testing jQuery-EasyXDM with jQuery <span id="jquery_version"></span></h1>
     <table>
     </table>
   </body>

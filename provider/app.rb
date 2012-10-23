@@ -3,6 +3,7 @@ require 'json'
 
 configure do
   disable :protection # Avoid prevention of OPTIONS requests to check if CS is allowed
+  set :port, 4569
 end
 
 before do
@@ -16,10 +17,6 @@ options '/*' do
           'Access-Control-Max-Age' => '5')
   content_type 'text/plain'
   ""
-end
- 
-get '/' do
-  redirect '/index.html'
 end
 
 get '/test_get.js' do

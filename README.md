@@ -77,24 +77,25 @@ includes the jQuery-EasyXDM plugin enable easyXDM debugging.
 
 <pre class="note">
     $ git clone git@github.com:GyldendalDigital/jQuery-EasyXDM.git
-    $ cd jQuery-EasyXDM && pushd test/public
+    $ cd jQuery-EasyXDM && pushd provider/public
     $ mkdir easyXDM && cd easyXDM
     $ wget http://cloud.github.com/downloads/oyvindkinsey/easyXDM/easyXDM-2.4.15.118.zip
     $ unzip easyXDM-2.4.15.118.zip
     $ rm -rf easyXDM-2.4.15.118.zip example tests cors
     $ popd
     $ sudo gem install sinatra --no-rdoc --no-ri
-    $ ruby test/app.rb
+    $ ruby consumer/app.rb &
+    $ ruby provider/app.rb &
 </pre>
 
 **3. Browse to the demo page**:
 
 <pre class="note">
-    $ firefox http://consumer.example.com:4567/
+    $ firefox http://consumer.example.com:4568/
 </pre>
 
 For running with easyXDM debugging enabled access the
-http://consumer.example.com:4567/index.html?jquery.easyXDM.debug=true page.
+http://consumer.example.com:4568/index.html?jquery.easyXDM.debug=true page.
 
 ## Document generation
 

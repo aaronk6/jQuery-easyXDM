@@ -18,9 +18,9 @@ var jquery_easyXDM = {};
       if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
         easyXDM_debug = true;
       }
-      var easyXDM_url = "/easyXDM/easyXDM.min.js";
+      var easyXDM_url = provider_base_url + "/easyXDM/easyXDM.min.js";
       if (easyXDM_debug) {
-        easyXDM_url = "/easyXDM/easyXDM.debug.js"
+        easyXDM_url = provider_base_url + "/easyXDM/easyXDM.debug.js"
       }
       function continue_after_easyXDM_load() {
         // Use noConflict to release any global state, to avoid conflict with
