@@ -88,8 +88,8 @@ var jquery_easyXDM = {};
     }
   };
 
-  jQuery.ajaxTransport(function (options, originalOptions, jqXHR) {
-    if (!$.support.cors && options.crossDomain) {
+  $.ajaxTransport("+*",function (options, originalOptions, jqXHR) {
+    if ( options.crossDomain && (!$.support.cors || easyXDM_debug) ) {
       // Assume a relative url as fallback, even if it is senseless, it may be used for testing.
       var provider_base_url = "";
       // Each CORS enabled provider must have a unique connection, therefore
