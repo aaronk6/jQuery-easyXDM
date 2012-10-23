@@ -10,14 +10,14 @@ var jquery_easyXDM = {};
   var callbackQueue = [];
   var easyXDM_connection = null;
   var error = null;
+  // Allow forced usage and debugging of easyXDM by adding jquery.easyXDM.debug=true as parameter
+  // to the page that uses this plugin.
+  var easyXDM_debug = false;
+  if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
+    easyXDM_debug = true;
+  }
   var doRequests = function (provider_base_url,callbacks) {
-    if (!$.support.cors) {
-      // Allow debugging of easyXDM by adding easyXDM_debug=true as parameter
-      // to the page that uses this plugin.
-      var easyXDM_debug = false;
-      if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
-        easyXDM_debug = true;
-      }
+    if (!$.support.cors || easyXDM_debug) {
       var easyXDM_url = provider_base_url + "/easyXDM/easyXDM.min.js";
       if (easyXDM_debug) {
         easyXDM_url = provider_base_url + "/easyXDM/easyXDM.debug.js"
