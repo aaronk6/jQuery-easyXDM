@@ -107,7 +107,7 @@ var jquery_easyXDM = {};
               }
               easyXDM_connection.jquery_proxy(originalOptions, continuation_proxy);
             },
-            failure:function () {
+            error:function () {
               // Unable to get easyXDM connection
             }
           });
