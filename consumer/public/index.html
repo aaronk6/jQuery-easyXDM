@@ -29,20 +29,14 @@
             dataType: "json",
             data: {foo : "bar"},
             success: function(json) {
-              console.log("success callback for "+result_id);
               if (json.foo === "bar") {
                 $("#"+result_id).addClass("success").html("success");
               } 
               else {
-                console.log("JSON problem");
-                console.log(json);
                 $("#"+result_id).addClass("failed").html("failed");
               }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              console.log("error callback for "+result_id);
-              console.log(textStatus);
-              console.log(errorThrown);
               $("#"+result_id).addClass("failed").html(errorThrown.toString());
             }
           });
