@@ -42,7 +42,7 @@ var jquery_easyXDM = {};
         // Load a json implementation if needed by old browsers
         // Avoid easyXDM helper that returns before the script is loaded.
         if (!(typeof(window["JSON"]) == 'object' && window["JSON"])) {
-          $.getScript("/easyXDM/json2.js", continue_after_easyXDM_load);
+          $.getScript(provider_base_url + "/easyXDM/json2.js", continue_after_easyXDM_load);
         } else {
           continue_after_easyXDM_load();
         }
