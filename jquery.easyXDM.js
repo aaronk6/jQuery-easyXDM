@@ -105,6 +105,7 @@ var jquery_easyXDM = {};
               function continuation_proxy(results) {
                 completeCallback(results.status, results.statusText, results.responses, results.headers);
               }
+              originalOptions.context = null;
               easyXDM_connection.jquery_proxy(originalOptions, continuation_proxy);
             },
             error:function () {
