@@ -26,7 +26,7 @@
     // instantiate a new easyXDM object which will handle the request
     var remote = new scoped_easyXDM.Rpc(
       {
-        local:"name.html",
+        local:"/easyXDM/name.html",
         swf:"/easyXDM/easyxdm.swf"
         // The provider is "passive", so no need to define an onReady handler
       }, {
