@@ -21,7 +21,11 @@
     // and must match the noConflict name in parent.
     var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
     // instantiate a new easyXDM object which will handle the request
-    var remote = new scoped_easyXDM.Rpc({ local:"name.html", swf:"easyxdm.swf"}, {
+    var remote = new scoped_easyXDM.Rpc(
+      {
+        local:"name.html",
+        swf:"easyxdm.swf"
+      }, {
       local:{
         // define the exposed method
         jquery_proxy:function (config, continuation_proxy) {

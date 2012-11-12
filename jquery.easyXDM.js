@@ -34,7 +34,11 @@ var jquery_easyXDM = {};
         if (easyXDM_debug) {
           remote_url += "?jquery.easyXDM.debug=true"
         }
-        easyXDM_connection = new scoped_easyXDM.Rpc({ remote:remote_url }, { remote:{ jquery_proxy:{} } });
+        easyXDM_connection = new scoped_easyXDM.Rpc(
+          {
+            remote:remote_url
+          },
+          { remote:{ jquery_proxy:{} } });
         callbacks.success(easyXDM_connection);
       }
 
