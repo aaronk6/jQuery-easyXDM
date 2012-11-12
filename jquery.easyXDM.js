@@ -36,7 +36,8 @@ var jquery_easyXDM = {};
         }
         easyXDM_connection = new scoped_easyXDM.Rpc(
           {
-            remote:remote_url
+            remote:remote_url,
+            swf:provider_base_url + "/easyXDM/easyxdm.swf"
           },
           { remote:{ jquery_proxy:{} } });
         callbacks.success(easyXDM_connection);

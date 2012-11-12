@@ -24,7 +24,7 @@
     var remote = new scoped_easyXDM.Rpc(
       {
         local:"name.html",
-        swf:"easyxdm.swf"
+        swf:"/easyXDM/easyxdm.swf"
       }, {
       local:{
         // define the exposed method
