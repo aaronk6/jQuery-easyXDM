@@ -2,8 +2,9 @@
  * https://github.com/GyldendalDigital/jQuery-EasyXDM
  */
 
-var jquery_easyXDM = {};
 (function ($) {
+  var jquery_easyXDM = {};
+  var global = this;
   // Used pattern from http://backtothefront.net/2012/asynchronous-singleton-api/
   // for thread safe single instance easyXDM instantiation.
   var state = "before";
@@ -123,4 +124,6 @@ var jquery_easyXDM = {};
       };
     }
   });
+
+  global.jquery_easyXDM = jquery_easyXDM;
 })(jQuery);

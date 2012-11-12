@@ -7,6 +7,8 @@
  *
  */
 (function ($) {
+  var jquery_easyXDM = {};
+  var global = this;
   // Load correct version of easyXDM
   var easyXDM_debug = false;
   if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
@@ -20,6 +22,7 @@
     // Use the scoped easyXDM available as a unique global name in the "parent",
     // and must match the noConflict name in parent.
     var scoped_easyXDM = easyXDM.noConflict("jquery_easyXDM");
+    jquery_easyXDM.easyXDM = scoped_easyXDM;
     // instantiate a new easyXDM object which will handle the request
     var remote = new scoped_easyXDM.Rpc(
       {
@@ -76,4 +79,6 @@
       continue_after_easyXDM_load();
     }
   });
+
+  global.jquery_easyXDM = jquery_easyXDM;
 })(jQuery);
