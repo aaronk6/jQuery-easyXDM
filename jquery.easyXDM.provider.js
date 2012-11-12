@@ -25,6 +25,7 @@
       {
         local:"name.html",
         swf:"/easyXDM/easyxdm.swf"
+        // The provider is "passive", so no need to define an onReady handler
       }, {
       local:{
         // define the exposed method
