@@ -39,6 +39,12 @@
           // This request is now inside the embedded iframe, and is therefore
           // by definition no longer a crossDomain request.
           config.crossDomain = false;
+          if (typeof(config.xhrFields) === "object") {
+            // The withCredentials attribute is not supported in IE <= 7
+            // (causes a native xhr exception if set), and it's not needed for
+            // this non-crossDomain request anyway.
+            delete config.xhrFields.withCredentials;
+          }
           $.ajax(config).done(function (data, textStatus, jqXHR) {
               var result = {
                 status    :jqXHR.status,

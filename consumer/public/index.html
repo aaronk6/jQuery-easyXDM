@@ -19,10 +19,10 @@
     <script type="text/javascript" src="http://provider.example.net:4569/javascripts/jquery.easyXDM.js"></script>
     <script type="text/javascript">
       $(function(){
-        function doTheAjax(id,str,verb,relative_url) {
+        function doTheAjax(id,str,verb,relative_url,extra_config) {
           var result_id = id + "_result";
           $("body table").append("<tr><td>" + str + "</td><td id=\""+result_id+"\"></td></tr>");
-          $.ajax({
+          var config = {
             url: "http://provider.example.net:4569"+relative_url,
             crossDomain: true,
             type: verb,
@@ -31,7 +31,7 @@
             success: function(json) {
               if (json.foo === "bar") {
                 $("#"+result_id).addClass("success").html("success");
-              } 
+              }
               else {
                 $("#"+result_id).addClass("failed").html("failed");
               }
@@ -39,10 +39,14 @@
             error: function(jqXHR, textStatus, errorThrown) {
               $("#"+result_id).addClass("failed").html(errorThrown.toString());
             }
-          });
+          };
+          if (typeof(extra_config) === "object")
+            $.extend(config, extra_config);
+          $.ajax(config);
         }
         $("#jquery_version").html(jQuery.fn.jquery);
         // Keep existing value of $.support.cors to check that auto selection of transport works as expected.
+        var support_cors = $.support.cors;
         doTheAjax("test1","CORS GET","GET","/test_get.js");
         doTheAjax("test2","CORS POST","POST","/test_post.js");
         $.support.cors = true; // Force usage of regular ajax, even if CORS is not supported.
@@ -52,6 +56,13 @@
         doTheAjax("test5","easyxdm GET","GET","/test_get.js");
         doTheAjax("test6","easyxdm POST","POST","/test_post.js");
         doTheAjax("test7","easyxdm GET invalid url, always fail with 'Not Found'","GET","/test_missing.js");
+        var credential_options = {
+          xhrFields: { withCredentials: true },
+          headers: { "X-Requested-With": "XMLHttpRequest" }
+        };
+        $.support.cors = support_cors;
+        doTheAjax("test8","CORS GET withCredentials","GET","/test_get.js", credential_options);
+        doTheAjax("test9","CORS POST withCredentials","POST","/test_post.js", credential_options);
       });
     </script>
   </head>
