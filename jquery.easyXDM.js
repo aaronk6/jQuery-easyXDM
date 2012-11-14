@@ -17,6 +17,11 @@
   if (/jquery\.easyXDM\.debug=true/.test(String(window.location))) {
     easyXDM_debug = true;
   }
+  if (easyXDM_debug) {
+    if ($("#log").length == 0)
+       $("body").append("<div id=\"log\"></div>");
+  }
+
   var doRequests = function (provider_base_url,callbacks) {
     if (!$.support.cors || easyXDM_debug) {
       var easyXDM_url = provider_base_url + "/easyXDM/easyXDM.min.js";
@@ -32,14 +37,17 @@
         // name in the provider.
         jquery_easyXDM.easyXDM = scoped_easyXDM;
         var remote_url = provider_base_url + "/javascripts/jquery.easyXDM.provider.html";
+        var container = $("#jquery_easyXDM_provider_container")[0] || null;
         if (easyXDM_debug) {
           remote_url += "?jquery.easyXDM.debug=true"
+          if (!container)
+            container = $("<div id=\"jquery_easyXDM_provider_container\"></div>").appendTo($("body"))[0];
         }
         easyXDM_connection = new scoped_easyXDM.Rpc(
           {
             remote:remote_url,
             swf:provider_base_url + "/easyXDM/easyxdm.swf",
-            container: "jquery_easyXDM_provider_container",
+            container: container,
             onReady:function() { callbacks.success(easyXDM_connection); }
           },
           { remote:{ jquery_proxy:{} } });
