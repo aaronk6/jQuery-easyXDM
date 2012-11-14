@@ -39,6 +39,7 @@
           {
             remote:remote_url,
             swf:provider_base_url + "/easyXDM/easyxdm.swf",
+            container: "jquery_easyXDM_provider_container",
             onReady:function() { callbacks.success(easyXDM_connection); }
           },
           { remote:{ jquery_proxy:{} } });

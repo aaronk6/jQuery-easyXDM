@@ -4,6 +4,16 @@
         <title>jquery.easyXDM cross-domain XHMLHttpRequest provider</title>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
         <script type="text/javascript" src="/javascripts/jquery.easyXDM.provider.js"></script>
+        <script type="text/javascript">
+          $(function() {
+            if (/jquery\.easyXDM\.debug=true/.test(window.location)) {
+              $("body").append(
+                "<h2>Domain: " + window.location.host + "</h2>"
+              + "<div id=\"log\" style=\"height:200px;background-color:#e7e7e7;border:1px solid #878787;overflow:auto\"></div>"
+              );
+            }
+          });
+        </script>
     </head>
     <body>
     </body>
