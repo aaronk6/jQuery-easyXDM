@@ -58,7 +58,7 @@
           };
           if (typeof(extra_config) === "object")
             $.extend(config, extra_config);
-          $.ajax(config);
+          return $.ajax(config);
         }
         $("#jquery_version").html(jQuery.fn.jquery);
         // Keep existing value of $.support.cors to check that auto selection of transport works as expected.
@@ -72,13 +72,19 @@
         doTheAjax("test5","easyxdm GET","GET","/test_get.js");
         doTheAjax("test6","easyxdm POST","POST","/test_post.js");
         doTheAjax("test7","easyxdm GET invalid url, always fail with 'Not Found'","GET","/test_missing.js");
+
         var credential_options = {
           xhrFields: { withCredentials: true },
           headers: { "X-Requested-With": "XMLHttpRequest" }
         };
         $.support.cors = support_cors;
-        doTheAjax("test8","CORS GET withCredentials","GET","/test_get.js", credential_options);
-        doTheAjax("test9","CORS POST withCredentials","POST","/test_post.js", credential_options);
+        doTheAjax("test8","CORS GET with credentials (set cookie)","GET","/test_get_with_cookie_return.js",credential_options)
+          .done(function() {
+            doTheAjax("test9","CORS GET with credentials (verify cookie)","GET","/test_get_with_credentials.js",credential_options)
+              .done(function() {
+                doTheAjax("test10","CORS POST with credentials","POST","/test_post_with_credentials.js",credential_options);
+            })
+          });
       });
     </script>
   </head>
