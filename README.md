@@ -8,7 +8,7 @@ The jQuery-easyXDM plugin modifies the [jQuery.ajax()](http://api.jquery.com/jQu
 method to automatically use [easyXDM](http://easyxdm.net), written by Øivind Kinsey, when the browser does
  not support
 [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en/http_access_control)
-(particularly useful for IE6, IE7 and IE8).
+(particularly useful for IE6, IE7, IE8, and IE9).
 
 This plugin contains also an easy to setup test example supporting the CORS
 standard (see the Test section).
@@ -47,6 +47,9 @@ library and the jQuery-easyXDM plugin files residing on the server.
 
 With this library and plugin, the server will now correctly handle CORS
 requests from browsers not supporting CORS.
+<a href="https://developer.mozilla.org/en-US/docs/HTTP_access_control#Requests_with_credentials">
+Requests with credentials</a> are supported under the assumption that browsers that don't
+fully support CORS will send cookies regardless.
 
 ## Consumer
 
