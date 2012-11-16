@@ -1,8 +1,8 @@
 /*
- * https://github.com/GyldendalDigital/jQuery-EasyXDM
+ * https://github.com/GyldendalDigital/jQuery-easyXDM
  *
  * This is a CORS (Cross-Origin Resource Sharing) and AJAX enabled endpoint
- * for jQuery-EasyXDM plugin.
+ * for jQuery-easyXDM plugin.
  * It proxys jquery.easyXDM requests with an easyXDM provider.
  *
  */

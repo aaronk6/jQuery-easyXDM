@@ -1,5 +1,5 @@
 /*
- * https://github.com/GyldendalDigital/jQuery-EasyXDM
+ * https://github.com/GyldendalDigital/jQuery-easyXDM
  */
 
 (function ($) {
