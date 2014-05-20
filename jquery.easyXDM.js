@@ -121,6 +121,7 @@
                 completeCallback(results.status, results.statusText, results.responses, results.headers);
               }
               originalOptions.context = null;
+              originalOptions.headers = options.headers;
               easyXDM_connection.jquery_proxy(originalOptions, continuation_proxy);
             },
             error:function () {
